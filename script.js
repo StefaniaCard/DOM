@@ -24,12 +24,16 @@ function guardarProducto() {
   card.className = "card";
 
   card.innerHTML = `
-    <img src="${imagen}" alt="vinilo">
-    <h3>${titulo}</h3>
-    <p>${descripcion}</p>
-    <p><strong>$${precioFinal.toLocaleString()}</strong></p>
-    <button onclick="eliminarProducto(this)">Eliminar</button>
-  `;
+  <img src="vinilo.png" alt="vinilo">
+
+  <h3>${titulo}</h3>
+
+  <p>${descripcion}</p>
+
+  <p><strong>$${precioFinal.toLocaleString()}</strong></p>
+
+  <button onclick="eliminarProducto(this)">Eliminar</button>
+`;
 
   document.getElementById("contenedor").appendChild(card);
 
