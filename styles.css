@@ -171,3 +171,28 @@ button:hover {
   gap: 8px;
   margin: 10px 0;
 }
+
+.card button {
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.card .btn-editar {
+  background: #00ffd5;
+  color: black;
+}
+
+.card .btn-editar:hover {
+  background: #00c2a8;
+}
+
+.card .btn-eliminar {
+  background: red;
+  color: white;
+}
+
+.card .btn-eliminar:hover {
+  background: darkred;
+}
