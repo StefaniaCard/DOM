@@ -1,4 +1,5 @@
 let contador = 0;
+let cardEditando = null;
 
 function guardarProducto() {
 
@@ -20,29 +21,53 @@ function guardarProducto() {
     precioFinal = precio * 0.5;
   }
 
-  let card = document.createElement("div");
-  card.className = "card";
+  if (cardEditando) {
+    cardEditando.innerHTML = `
+      <img src="vinilo.png" alt="vinilo">
+      <h3>${titulo}</h3>
+      <p class="descripcion">${descripcion}</p>
+      <p><strong>$${precioFinal.toLocaleString()}</strong></p>
+      <button onclick="editarProducto(this)">Editar</button>
+      <button onclick="eliminarProducto(this)">Eliminar</button>
+    `;
+    cardEditando = null;
+  } else {
+    let card = document.createElement("div");
+    card.className = "card";
 
-  card.innerHTML = `
-  <img src="vinilo.png" alt="vinilo">
+    card.innerHTML = `
+      <img src="vinilo.png" alt="vinilo">
+      <h3>${titulo}</h3>
+      <p class="descripcion">${descripcion}</p>
+      <p><strong>$${precioFinal.toLocaleString()}</strong></p>
+      <button onclick="editarProducto(this)">Editar</button>
+      <button onclick="eliminarProducto(this)">Eliminar</button>
+    `;
 
-  <h3>${titulo}</h3>
+    document.getElementById("contenedor").appendChild(card);
 
-  <p>${descripcion}</p>
-
-  <p><strong>$${precioFinal.toLocaleString()}</strong></p>
-
-  <button onclick="eliminarProducto(this)">Eliminar</button>
-`;
-
-  document.getElementById("contenedor").appendChild(card);
-
-  contador++;
-  actualizarContador();
-
-  document.getElementById("mensaje").style.display = "none";
+    contador++;
+    actualizarContador();
+    document.getElementById("mensaje").style.display = "none";
+  }
 
   limpiarFormulario();
+}
+
+function editarProducto(boton) {
+  let card = boton.parentElement;
+
+  let titulo = card.querySelector("h3").innerText;
+  let descripcion = card.querySelector(".descripcion").innerText;
+  let precioTexto = card.querySelector("strong").innerText;
+
+  let precio = precioTexto.replace("$", "").replace(/\./g, "");
+
+  document.getElementById("titulo").value = titulo;
+  document.getElementById("descripcion").value = descripcion;
+  document.getElementById("precio").value = precio;
+
+  cardEditando = card;
 }
 
 function eliminarProducto(boton) {
